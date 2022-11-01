@@ -1,0 +1,51 @@
+version: "3.9"
+services:
+  dfuse:
+    tty: false
+    build: 
+      context: ./
+      dockerfile: ./files/dfuse.dockerfile
+      args:
+        NETWORK: ${NETWORK}
+        SNAPSHOT: ${SNAPSHOT}
+        API: ${API}
+    volumes:
+      - ./dfuse-data:/dfuse-data #dfuse data folder, remove to start fresh
+      - ./snapshots:/snapshots #snapshots to copy to container
+    expose:
+      - 9888 #mindreader http endpoint
+      - 9000 #firehose
+    
+
+  lightproof:
+    depends_on:
+      - "dfuse"
+    tty: true
+    volumes:
+      - ./dfuse-data:/dfuse-data
+      - ./lightproof-data:/lightproof-data
+    build:
+      context: ./
+      dockerfile: ./files/lightproof-db.dockerfile
+      args:
+        NETWORK: ${NETWORK}
+        START_BLOCK: ${START_BLOCK}
+    expose:
+      - 8285 #lightproof-db GET endpoint
+
+  ibc:
+    depends_on:
+       - "lightproof"
+    tty: true
+    build: 
+      context: ./
+      dockerfile: ./files/ibc-server.dockerfile
+      args:
+        NETWORK: ${NETWORK}
+        API: ${API}
+        CHAIN_ID: ${CHAIN_ID}
+    ports:
+      - ${WS_PORT}:7788  #ibc-server WS endpoint
+volumes:
+  dfuse-data:
+  snapshots:

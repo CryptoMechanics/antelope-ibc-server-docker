@@ -1,0 +1,19 @@
+start:
+  args:
+  - mindreader 
+  - merger
+  - blockmeta
+  - firehose
+  flags:
+   mindreader-log-to-zap: false
+   mindreader-no-blocks-log: true
+   #log-to-file: false
+   mindreader-auto-snapshot-period: 15m
+   mindreader-number-of-snapshots-to-keep: 1
+   mindreader-blocks-chan-capacity: 10000
+   data-dir: "/dfuse-data"
+   
+   mindreader-snapshot-store-url: /snapshots
+   common-blockstream-addr: :13010
+   firehose-grpc-listen-addr: ":9000"
+

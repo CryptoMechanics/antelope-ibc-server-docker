@@ -1,0 +1,1 @@
+ docker ps -q| xargs -L 1 -P 5 docker logs --tail=10 --follow -t

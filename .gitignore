@@ -1,0 +1,5 @@
+dfuse-data/
+lightproof-data/
+snapshots/*.bin*
+.env
+.DS_STORE
