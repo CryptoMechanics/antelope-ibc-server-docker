@@ -1,6 +1,5 @@
 PORT=8285
-MERGED_BLOCKS=/dfuse-data/storage/merged-blocks
-dbPath=/lightproof-data
-grpcAddress=dfuse:9000
-grpcInsecure=true
-#forceStartBlock=24856016
+DB_PATH=/lightproof-data
+GRPC_ADDRESS=dfuse:9000
+GRPC_INSECURE=true
+#FORCE_START_BLOCK=24856016
