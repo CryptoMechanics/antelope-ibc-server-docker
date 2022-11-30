@@ -1,6 +1,6 @@
-port=7788
-grpcAddress=dfuse:9000
-nodeosApi=http://dfuse:9888
-lightproofAPI=http://lightproof:8285
-firehoseMinBlock=0
-grpcInsecure=true
+PORT=7788
+GRPC_ADDRESS=dfuse:9000
+NODEOS_API=http://dfuse:9888
+LIGHTPROOF_API=http://lightproof:8285
+FIREHOSE_MIN_BLOCK=0
+GRPC_INSECURE=true
