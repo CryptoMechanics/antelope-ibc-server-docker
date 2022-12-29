@@ -24,14 +24,15 @@ ARG NETWORK
 
 #if building for WAX / WAX testnet, build instrumented WAX nodeos with the deep mind plugin
 WORKDIR /
-RUN if [ "$NETWORK" = "wax-testnet" ] || [ "$NETWORK" = "wax" ] ; then git clone -b release/wax/2.0.x-dm --single-branch https://github.com/dfuse-io/eos.git; fi;
-WORKDIR /eos
+RUN if [ "$NETWORK" = "wax-testnet" ] || [ "$NETWORK" = "wax" ] ; then git clone -b wax-leap-3.2 --single-branch https://github.com/worldwide-asset-exchange/wax-blockchain; fi;
+WORKDIR /wax-blockchain
 RUN if [ "$NETWORK" = "wax-testnet" ] || [ "$NETWORK" = "wax" ] ; then git submodule update --init --recursive; fi;
-RUN if [ "$NETWORK" = "wax-testnet" ] || [ "$NETWORK" = "wax" ] ; then /eos/scripts/eosio_build.sh -y; fi;
-#  RUN if [ "$NETWORK" = "wax-testnet" ] || [ "$NETWORK" = "wax" ] ; then cp /eos/build/programs/nodeos/nodeos /usr/bin; fi;
+RUN if [ "$NETWORK" = "wax-testnet" ] || [ "$NETWORK" = "wax" ] ; then /wax-blockchain/scripts/install_deps.sh -y; fi;
+#TODO autodetect threads using nproc
+RUN if [ "$NETWORK" = "wax-testnet" ] || [ "$NETWORK" = "wax" ] ; then /wax-blockchain/scripts/pinned_build.sh deps build 8; fi;
 
 #install wax or leap binaries
-RUN if [ "$NETWORK" = "wax-testnet" ] || [ "$NETWORK" = "wax" ] ; then cp /eos/build/programs/nodeos/nodeos /usr/bin; else curl -L https://github.com/AntelopeIO/leap/releases/download/v3.1.2/leap-3.1.2-ubuntu18.04-x86_64.deb --output eosio.deb && apt-get -y install ./eosio.deb;fi;
+RUN if [ "$NETWORK" = "wax-testnet" ] || [ "$NETWORK" = "wax" ] ; then cp /wax-blockchain/build/programs/nodeos/nodeos /usr/bin;  else curl -L https://github.com/AntelopeIO/leap/releases/download/v3.1.2/leap-3.1.2-ubuntu18.04-x86_64.deb --output eosio.deb && apt-get -y install ./eosio.deb;fi;
 
 #configure mindreader and firehose for the chosen chain
 RUN mkdir /dfuse 
