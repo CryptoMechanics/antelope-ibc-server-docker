@@ -1,5 +1,7 @@
 # NOTE : This repository is no longer maintained. New repository is https://github.com/CryptoMechanics/antelope-ibc-server-docker
 
+---
+
 # Antelope IBC Proof Docker
 This includes everything needed to generate proofs for antelope chains and relay them to a client using websockets.
 It utilises docker compose to launch and manage mindreader, firehose, lightproof-db, ibc-server.
