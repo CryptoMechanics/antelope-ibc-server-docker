@@ -8,8 +8,8 @@ start:
    mindreader-log-to-zap: false
    mindreader-no-blocks-log: true
    #log-to-file: false
-   mindreader-auto-snapshot-period: 15m
-   mindreader-number-of-snapshots-to-keep: 1
+   mindreader-auto-snapshot-period: 0
+   mindreader-number-of-snapshots-to-keep: 0
    mindreader-blocks-chan-capacity: 10000
    data-dir: "/dfuse-data"
    
